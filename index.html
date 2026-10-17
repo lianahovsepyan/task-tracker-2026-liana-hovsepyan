@@ -28,7 +28,7 @@
 <body>
   <div class="container">
     <h1>🚀 Task Tracker (Full-Stack)</h1>
-    <p class="subtitle">React & Express Framework Integration - TUMO Labs Station 3</p>
+    <p class="subtitle">Express & Frontend Integration - TUMO Labs Station 3</p>
 
     <div class="form-group">
       <input type="text" id="taskTitle" placeholder="Enter a new task...">
@@ -49,13 +49,19 @@
     const taskPriority = document.getElementById('taskPriority');
     const addBtn = document.getElementById('addBtn');
 
-    let tasks = [
-      { id: 1, title: 'Learn React & Next.js Frameworks', priority: 'High' },
-      { id: 2, title: 'Build Full-Stack Express API', priority: 'High' },
-      { id: 3, title: 'Deploy Application to Cloud Framework', priority: 'Medium' }
-    ];
+    async function fetchTasks() {
+      try {
+        const response = await fetch(API_URL);
+        const result = await response.json();
+        if (result.success) {
+          renderTasks(result.data);
+        }
+      } catch (error) {
+        console.error('Error fetching tasks:', error);
+      }
+    }
 
-    function renderTasks() {
+    function renderTasks(tasks) {
       taskList.innerHTML = '';
       tasks.forEach(task => {
         const li = document.createElement('li');
@@ -71,21 +77,41 @@
       });
     }
 
-    addBtn.addEventListener('click', () => {
+    addBtn.addEventListener('click', async () => {
       const title = taskTitle.value.trim();
       if (!title) return;
-      const newTask = { id: Date.now(), title, priority: taskPriority.value };
-      tasks.push(newTask);
-      taskTitle.value = '';
-      renderTasks();
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, priority: taskPriority.value })
+        });
+        const result = await response.json();
+        if (result.success) {
+          taskTitle.value = '';
+          fetchTasks();
+        }
+      } catch (error) {
+        console.error('Error adding task:', error);
+      }
     });
 
-    function deleteTask(id) {
-      tasks = tasks.filter(t => t.id !== id);
-      renderTasks();
+    async function deleteTask(id) {
+      try {
+        const response = await fetch(`${API_URL}/${id}`, {
+          method: 'DELETE'
+        });
+        const result = await response.json();
+        if (result.success) {
+          fetchTasks();
+        }
+      } catch (error) {
+        console.error('Error deleting task:', error);
+      }
     }
 
-    renderTasks();
+    fetchTasks();
   </script>
 </body>
 </html>
