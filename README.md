@@ -1,21 +1,14 @@
-# task-tracker-2026-liana-hovsepyan
-# Full-Stack Task Tracker (Frameworks Station 3)
+# Full-Stack Task Tracker
 
-A full-stack project built for TUMO Labs (Station Project 3: The Full Stack). It demonstrates modern client-server architectural principles using React/JavaScript frontend concepts, Node.js/Express backend APIs, and MongoDB schema structures.
+A full-stack task management application built with HTML/JavaScript frontend and Express.js REST API backend for TUMO Labs Station Project 3.
 
 ## Features
-- **Frontend Layer:** Responsive single-page interface with dynamic DOM rendering, state manipulation, and event management.
-- **Backend API Layer:** Express RESTful framework providing endpoints (`GET`, `POST`, `DELETE`) to handle data flow.
-- **Database & State Management:** Schema representation designed for MongoDB / persistent data storage.
-- **Cloud Preparedness:** Configured for deployment on modern cloud platforms (Vercel, Render, Heroku).
-
-## Tech Stack
-- **Frontend:** JavaScript (ES6+), React Concepts, HTML5, CSS3
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB Integration architecture
-- **Version Control:** Git & GitHub Workflow
+- Load tasks dynamically from Express backend
+- Add new tasks with title and priority
+- Delete tasks
 
 ## How to Run Locally
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/lianahovsepyan/task-tracker-2026-liana-hovsepyan.git](https://github.com/lianahovsepyan/task-tracker-2026-liana-hovsepyan.git)
+1. Clone the repository: `git clone https://github.com/lianahovsepyan/task-tracker-2026-liana-hovsepyan.git`
+2. Install dependencies: `npm install`
+3. Start server: `node server.js`
+4. Open index.html in browser.
